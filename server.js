@@ -13,8 +13,7 @@ const spotifyApi = new SpotifyWebApi({
 
   redirectUri: "http://localhost:8888/callback",
 });
-const token =
-  "BQCRryxQoKX--8p7ibMq6pnsvWKIQmBaE1SsZlQPR8EdWeGFeocS66fNoWyZgi1ey3a8AH8y2fB2O0aXVWmtltK7tsNyEqCC1uYS_xAHgZ2fVR2wo2r-UrBo1ImtXPOJmpes49XRafkom9Y8BpPLMLGE05mYXF9W6vPsaavw3a5AR-w5Ia9mRTsR6YbOXUaYrkazoB14hXPxDdJUshnCvycTKobDHFoWq56W65Sl7lOuUA4Ouz5vz38MDu4Bt6_K7P0jnDFtpRx_ZaWPNTJp_n8UHgaWE70";
+const token = " BQAGAxIJ-jpnjpIUOQz-tldDdQhd4xQ9FckKpFDT9YSohQQr9CunlVAXjfRWcBvzuUWEWVMsiT1BzdqViiUJYL7ONywouXfMVnV0OzwxQEYRIOplPK9W4BoqSlb--EnyFVdO4c6vrQs3Wkt5fBXAc-qqt8O_lIsJkeUN0rAPocXpKfrkWIEXcvWyS5XmAVO33wsfGQ0xZewdtuDBgbmgAVbk36qAapK9t0xkiCevbahl2Wy5C-su17QfBwnddBL2QVz6lM1JP7z76klWHglFy12hMX8K6Qw"
 
 spotifyApi.setAccessToken(token);
 
