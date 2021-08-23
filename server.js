@@ -8,17 +8,14 @@ app.use(cors());
 app.use(express.json());
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "09dd7d2251364228a13fdbf31ff6b4cc",
-  clientSecret: "8d906e6614634d099483c5bf55eaf7fc",
-
-  // clientId: process.env.CLIENT_ID,
-  // clientSecret: process.env.CLIENTSECRET,
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENTSECRET,
 
   redirectUri: "http://localhost:8888/callback",
 });
 const token =
-  "BQDHbs7kkokUZrfzEB6VQRec8sfaZWFOtu2V3-Ta6Qwvh9SDTGmmolv5adJVhztQQm53FsvwjTS1DyXoyeMizfDf7EebyphBq2QGbxt1ssn1yqwEtUcxhkmUlugfq5dX0QpLN3y-dklz4Gnqi9l1OST95fxshc84TwpbSnfmKHImaVf2Czw8lseo3S__CVPp7yfy4g4woaEHYAEhsmEz1HgwupZJ_Mr3cszOh9SWu2UaKtFNbU2zPidpfqfDuvVjUTv7pIZFpao6g0jD_ygABaqPl52bx4Y";
-// const spotifyApi = new SpotifyWebApi();
+  "BQB9HVRl4WuK-r7x3JmkvsXVbYpXQeb4HvCpaXa6Y6EPLQSXNtdp_ljAdp91pVUU0FxSxwKnwPjDVM6KN56LBXu42HSlnvPfc8-w3tghXHgsIdRiUnJCAlaWqc_ardF6mJVuZiQiAKZwJ2-LFN5DLuWxYoiREEVhq2nDX-9nz7hCmxE0BD1n2d5g34kohmo5691ZBQUO58ZNayYY-r72p_RQGir6K0StjNZgfLENYpj8vBA_X3m76EPE5DdtEByh_LdU3BZ3dG2qCKlFPf9VSdsrMmCfXE8";
+
 spotifyApi.setAccessToken(token);
 
 // credentials are optional
@@ -51,7 +48,7 @@ const scopes = [
 
 // route for long term artists
 app.get("/topartists/longterm", async (req, res) => {
-  console.log(process.env);
+  //console.log(process.env);
   const data = await spotifyApi.getMyTopArtists({
     time_range: "long_term",
     limit: 8,
