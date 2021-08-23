@@ -13,7 +13,8 @@ const spotifyApi = new SpotifyWebApi({
 
   redirectUri: "http://localhost:8888/callback",
 });
-const token = " BQAGAxIJ-jpnjpIUOQz-tldDdQhd4xQ9FckKpFDT9YSohQQr9CunlVAXjfRWcBvzuUWEWVMsiT1BzdqViiUJYL7ONywouXfMVnV0OzwxQEYRIOplPK9W4BoqSlb--EnyFVdO4c6vrQs3Wkt5fBXAc-qqt8O_lIsJkeUN0rAPocXpKfrkWIEXcvWyS5XmAVO33wsfGQ0xZewdtuDBgbmgAVbk36qAapK9t0xkiCevbahl2Wy5C-su17QfBwnddBL2QVz6lM1JP7z76klWHglFy12hMX8K6Qw"
+const token =
+  "BQCpA1GjJxL0RZ8cZA_2RW3DMKCrRQJVsOIw4WU77mtaQdgTKqQkLQi12cEgCxc_MFDp9-aHQSFSehhk5UztPnPRsja6mk-nlL_qnpIfQqUAtgl_tVjNc09CJic3bbwZjyE4f69jUVOHnShzOeC7pVmBTw5Z5U5tyMwc1J72NKGq_DfIceRb9YsoKwtXhzki85W0ZqyjDgQaq37saT82JHxdk7ZtIH83-0ZyOfp0qwkQR6vHiAHr5zO9sJ5WBhGKQHtQgf6zoajRADRS1Jf6KhpDVOvGZ3g";
 
 spotifyApi.setAccessToken(token);
 
@@ -40,12 +41,8 @@ const scopes = [
   "user-follow-read",
   "user-follow-modify",
 ];
-// STEPS: routes for long, medium and short term artists
-// check they work via postman
-// deploy via heroku to get link
-// test via react/frontend
 
-// route for long term artists
+// route for artists
 app.get("/topartists/longterm", async (req, res) => {
   const data = await spotifyApi.getMyTopArtists({
     time_range: "long_term",
