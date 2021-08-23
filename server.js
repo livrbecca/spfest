@@ -15,7 +15,7 @@ const spotifyApi = new SpotifyWebApi({
 });
 //const token = "BQCpA1GjJxL0RZ8cZA_2RW3DMKCrRQJVsOIw4WU77mtaQdgTKqQkLQi12cEgCxc_MFDp9-aHQSFSehhk5UztPnPRsja6mk-nlL_qnpIfQqUAtgl_tVjNc09CJic3bbwZjyE4f69jUVOHnShzOeC7pVmBTw5Z5U5tyMwc1J72NKGq_DfIceRb9YsoKwtXhzki85W0ZqyjDgQaq37saT82JHxdk7ZtIH83-0ZyOfp0qwkQR6vHiAHr5zO9sJ5WBhGKQHtQgf6zoajRADRS1Jf6KhpDVOvGZ3g";
 
-spotifyApi.setAccessToken(access_token);
+//spotifyApi.setAccessToken(access_token);
 
 // credentials are optional
 
