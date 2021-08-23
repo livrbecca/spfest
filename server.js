@@ -48,12 +48,10 @@ const scopes = [
 
 // route for long term artists
 app.get("/topartists/longterm", async (req, res) => {
-  //console.log(process.env);
   const data = await spotifyApi.getMyTopArtists({
     time_range: "long_term",
     limit: 8,
   });
-
   res.json({
     message: "your top artists over the past several years",
     top_artists: data.body.items.map((item) => item.name),
@@ -152,7 +150,7 @@ app.listen(process.env.PORT, () =>
 
 // query param: limit
 // deafult 20
-// limit=15
+// e.g limit=15
 
 //https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10&offset=5
 
