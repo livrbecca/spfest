@@ -16,8 +16,8 @@ const spotifyApi = new SpotifyWebApi({
 // issue, heroku link and netlify link only work with hard coded value
 // line 69 alone doesn't work, issues about no token
 // token also expires after an hour
-//const token ="BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
-// spotifyApi.setAccessToken(token);
+//const token = "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
+//spotifyApi.setAccessToken(token);
 
 // credentials are optional
 
@@ -66,7 +66,7 @@ app.get("/callback", (req, res) => {
       const expires_in = data.body["expires_in"];
 
       // spotifyApi.setAccessToken(access_token);
-      // spotifyApi.setRefreshToken(refresh_token);
+      spotifyApi.setRefreshToken(refresh_token);
 
       // console.log("access_token:", access_token);
       // console.log("refresh_token:", refresh_token);
@@ -82,7 +82,7 @@ app.get("/callback", (req, res) => {
 
         console.log("The access token has been refreshed!");
         console.log("access_token:", access_token);
-        spotifyApi.setAccessToken(access_token);
+        //spotifyApi.setAccessToken(access_token);
       }, (expires_in / 2) * 1000);
     })
     .catch((error) => {
@@ -152,23 +152,3 @@ app.listen(process.env.PORT, () =>
     "livs HTTP Server up. Now go to http://localhost:8888/login in your browser."
   )
 );
-
-// personalization API
-// GET https://api.spotify.com/v1/me/top/{type}
-// HEADER, Authorization - required
-// {type} - required, only valid values: artists / tracks
-
-// query param: time_range
-// long_term - several years
-// medium_term - 6 months (default)
-// short_term - 4 weeks
-
-// query param: limit
-// deafult 20
-// e.g limit=15
-
-//https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10&offset=5
-
-//http://localhost:8888/callback?code=AQDOSzmJ8jpkiT9X278LCnkOI0zTuhYMgNL96hg9G7XdmHjxZ7a6-t05ryNoewA2UaPZrZGGw2O4CzUv8iy8HUJ7yB_nsV-3Srz0qqgLFNVvC2NcuVLAwnfD_K0M-g7YNYz3VvAVqGPw5TWl8bySKKPYh48iPH707cgUe71GpJG3aTPU5OzFE2YI7aB7WJcuv7hbYmEm4k-2M5qtcTVAx4yE5-aZPDYKc9AmkypMUnhivqSzxuHvrjeNdvRY9n6oKi8ewK63yuNg60dECu7nv7Niv9hED_ehqhACoPe_CLiB010Ztmdjzy3ymN4X0c3gSLRVvvphMnlPnmlUzlhzo9drlUobSVjOFULdsFzRDSFzhOGpTHEyktBe3AhqAdZSSblTfM1EgirssOrr-ZUXQ7IFG1nZ8cbrcONz2asTDG8Sh-dugptyRfQ0Tmw7jbbVZm-WKE5pgt9U6XEyPUagETDj18WrszqZQgKA9ZLSrAIvK2CVzWbGZqhSc9GyhaY_B12x-LXkUGwCiWRT1QsfmW6Bpkg3l7g6fpZJadG2nPdCmhBSHfW_KjhXlqvXG0asuKN1Aq6U435ecyd5SMXP8BAh4C-CCbGiGk8-0rClhBvQ2jHPu8fr5Ls1sZgFYf_uT3aughQp7ymfxmfllD_TkUUdE7-7t9_PB9QoIlbm2iFpvCs6h1ghzlDtzCNBEs4fTx2PsnwHtqzf9ZO79DqzdU_UFIU
-
-// access token = BQBWxrKG1esFexUjXT3bXvueVNQUplYscM60h25h2LVRyzNqaWQc3xNn8U3ZAkL_olEtCOu7_F2n9boXLaxxrfinCsrl-CKFQRYj7nR47e3jyTaUfc6_c6kXOXUqZiWLoO9BwuTU_nMwhXLaJzY-4g2PR4_EJ_IgMcm54qwiselIj_SJN97zpq3p1jr7eYOP7WH-bVepWFH-JMlXXn_dOHcgiVycFkVKBhLcVABZuc0OYlg61yUrMsD8iEll11RIbP5Xtfz5_r-dWkrFB_LHZkI5J1Unqkk
