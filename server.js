@@ -118,7 +118,7 @@ app.get("/topartists/longterm", async (req, res) => {
       console.log("The access token is " + data.body["access_token"]);
       console.log("_________________________________________");
       spotifyApi.setAccessToken(data.body["access_token"]);
-      const data = await spotifyApi.getMyTopArtists({
+      const musicData = await spotifyApi.getMyTopArtists({
         time_range: "long_term",
         limit: 8,
       });
