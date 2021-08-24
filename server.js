@@ -7,20 +7,6 @@ var SpotifyWebApi = require("spotify-web-api-node");
 app.use(cors());
 app.use(express.json());
 
-const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENTSECRET,
-  redirectUri: "http://localhost:8888/callback",
-});
-
-// issue, heroku link and netlify link only work with hard coded value
-// line 69 alone doesn't work, issues about no token
-// token also expires after an hour
-//const token = "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
-//spotifyApi.setAccessToken(token);
-
-// credentials are optional
-
 const scopes = [
   "ugc-image-upload",
   "user-read-playback-state",
@@ -42,6 +28,16 @@ const scopes = [
   "user-follow-read",
   "user-follow-modify",
 ];
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENTSECRET,
+  redirectUri: "http://localhost:8888/callback",
+});
+
+//const token = "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
+//spotifyApi.setAccessToken(token);
+
 app.get("/login", (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
@@ -61,11 +57,10 @@ app.get("/callback", (req, res) => {
     .authorizationCodeGrant(code)
     .then((data) => {
       const access_token = data.body["access_token"];
-
       const refresh_token = data.body["refresh_token"];
       const expires_in = data.body["expires_in"];
 
-      // spotifyApi.setAccessToken(access_token);
+      spotifyApi.setAccessToken(access_token);
       spotifyApi.setRefreshToken(refresh_token);
 
       // console.log("access_token:", access_token);
@@ -82,7 +77,7 @@ app.get("/callback", (req, res) => {
 
         console.log("The access token has been refreshed!");
         console.log("access_token:", access_token);
-        //spotifyApi.setAccessToken(access_token);
+        spotifyApi.setAccessToken(access_token);
       }, (expires_in / 2) * 1000);
     })
     .catch((error) => {
