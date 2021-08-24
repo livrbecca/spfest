@@ -16,9 +16,8 @@ const spotifyApi = new SpotifyWebApi({
 // issue, heroku link and netlify link only work with hard coded value
 // line 69 alone doesn't work, issues about no token
 // token also expires after an hour
-const token =
-  "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
-spotifyApi.setAccessToken(token);
+//const token = "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
+// spotifyApi.setAccessToken(token);
 
 // credentials are optional
 
@@ -91,6 +90,25 @@ app.get("/callback", (req, res) => {
       res.send(`Error getting Tokens: ${error}`);
     });
 });
+
+// retreieve an access token ?
+
+spotifyApi.clientCredentialsGrant().then(
+  function (data) {
+    console.log("_________________________________________");
+    console.log("The access token expires in " + data.body["expires_in"]);
+    console.log("The access token is " + data.body["access_token"]);
+    console.log("_________________________________________");
+    spotifyApi.setAccessToken(data.body["access_token"]);
+  },
+  function (err) {
+    console.log(
+      "Something went wrong when retrieving an access token",
+      err.message
+    );
+  }
+);
+
 // route for artists
 app.get("/topartists/longterm", async (req, res) => {
   const data = await spotifyApi.getMyTopArtists({
