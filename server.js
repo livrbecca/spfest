@@ -17,7 +17,7 @@ const spotifyApi = new SpotifyWebApi({
 // line 69 alone doesn't work, issues about no token
 // token also expires after an hour
 const token =
-  "BQAtioat8VRxyBO_auI0Zpnzp6DcQgage1e4kCCP9GqbiRUYz0JBsIkm9J_Dsb9XesQtSyMZJ90avRZH_zls5Zr42jP8dTrsIoNkfxSsJSbTVqphbIdgiXEFDyVwFXgq6K4Pa6klfUfnvJjc4Dlh4SubBsrN5DBdpVSUjwfUDHds2YoB3LC3LcZotM_l43D-Xl1gLxiQZhHXpkNwxBB6w14RGtwe05AJnqa7tceHnn9CPd8dIwqndFV-uGPDx4Vsb3OY3f4M15dA_4limvi-eZyuX2MBK6I";
+  "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
 spotifyApi.setAccessToken(token);
 
 // credentials are optional
