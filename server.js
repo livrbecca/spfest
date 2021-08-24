@@ -16,7 +16,7 @@ const spotifyApi = new SpotifyWebApi({
 // issue, heroku link and netlify link only work with hard coded value
 // line 69 alone doesn't work, issues about no token
 // token also expires after an hour
-//const token = "BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
+//const token ="BQD8ilqC5jFsLIozJVYtW7YUvPw0emFTHhUy2kgDam43PWzP10ELhqDoxc1Lsg1cjQPt6uecbgsR6lkCRdtUNgPI2pg1gH75bTuOO1Ut-rhDt8XjYn7fp009lXGjQPqEA3aou4wDZTlSA_gwyyRebQcYWo3uOcm8GrJAXUBZ0iV9h5rnzznbPtiWu6GRAlpTzEyHWVIsNhHiAaJsvqLMJFUW-wzv_HYB9HSRgj7d9DiqRgF5jhqOqCB9FHbQ-jpaHAbShiQRJ6CeoSv4ZBQyaEiJqW-4dbw";
 // spotifyApi.setAccessToken(token);
 
 // credentials are optional
@@ -65,15 +65,15 @@ app.get("/callback", (req, res) => {
       const refresh_token = data.body["refresh_token"];
       const expires_in = data.body["expires_in"];
 
-      //spotifyApi.setAccessToken(access_token);
-      spotifyApi.setRefreshToken(refresh_token);
+      // spotifyApi.setAccessToken(access_token);
+      // spotifyApi.setRefreshToken(refresh_token);
 
-      console.log("access_token:", access_token);
-      console.log("refresh_token:", refresh_token);
+      // console.log("access_token:", access_token);
+      // console.log("refresh_token:", refresh_token);
 
-      console.log(
-        `Sucessfully retreived access token. Expires in ${expires_in} s.`
-      );
+      // console.log(
+      //   `Sucessfully retreived access token. Expires in ${expires_in} s.`
+      // );
       res.send("Success! You can now close the window.");
 
       setInterval(async () => {
@@ -93,48 +93,32 @@ app.get("/callback", (req, res) => {
 
 // retreieve an access token ?
 
-// spotifyApi.clientCredentialsGrant().then(
-//   function (data) {
-//     console.log("_________________________________________");
-//     console.log("The access token expires in " + data.body["expires_in"]);
-//     console.log("The access token is " + data.body["access_token"]);
-//     console.log("_________________________________________");
-//     spotifyApi.setAccessToken(data.body["access_token"]);
-//   },
-//   function (err) {
-//     console.log(
-//       "Something went wrong when retrieving an access token",
-//       err.message
-//     );
-//   }
-// );
+spotifyApi.clientCredentialsGrant().then(
+  function (data) {
+    console.log("_________________________________________");
+    console.log("The access token expires in " + data.body["expires_in"]);
+    console.log("The access token is " + data.body["access_token"]);
+    console.log("_________________________________________");
+    spotifyApi.setAccessToken(data.body["access_token"]);
+  },
+  function (err) {
+    console.log(
+      "Something went wrong when retrieving an access token",
+      err.message
+    );
+  }
+);
 
 // route for artists
 app.get("/topartists/longterm", async (req, res) => {
-  spotifyApi.clientCredentialsGrant().then(
-    function (data) {
-      console.log("_________________________________________");
-      console.log("The access token expires in " + data.body["expires_in"]);
-      console.log("The access token is " + data.body["access_token"]);
-      console.log("_________________________________________");
-      spotifyApi.setAccessToken(data.body["access_token"]);
-      const musicData = await spotifyApi.getMyTopArtists({
-        time_range: "long_term",
-        limit: 8,
-      });
-      res.json({
-        message: "your top artists over the past several years",
-        top_artists: musicData.body.items.map((item) => item.name),
-      });
-    },
-
-    function (err) {
-      console.log(
-        "Something went wrong when retrieving an access token",
-        err.message
-      );
-    }
-  );
+  const data = await spotifyApi.getMyTopArtists({
+    time_range: "long_term",
+    limit: 8,
+  });
+  res.json({
+    message: "your top artists over the past several years",
+    top_artists: data.body.items.map((item) => item.name),
+  });
 });
 
 app.get("/topartists/mediumterm", async (req, res) => {
