@@ -13,11 +13,11 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: "http://localhost:8888/callback",
 });
 
-
 // issue, heroku link and netlify link only work with hard coded value
 // line 69 alone doesn't work, issues about no token
-// token also expires after an hour 
-const token = "BQAtioat8VRxyBO_auI0Zpnzp6DcQgage1e4kCCP9GqbiRUYz0JBsIkm9J_Dsb9XesQtSyMZJ90avRZH_zls5Zr42jP8dTrsIoNkfxSsJSbTVqphbIdgiXEFDyVwFXgq6K4Pa6klfUfnvJjc4Dlh4SubBsrN5DBdpVSUjwfUDHds2YoB3LC3LcZotM_l43D-Xl1gLxiQZhHXpkNwxBB6w14RGtwe05AJnqa7tceHnn9CPd8dIwqndFV-uGPDx4Vsb3OY3f4M15dA_4limvi-eZyuX2MBK6I"
+// token also expires after an hour
+const token =
+  "BQAtioat8VRxyBO_auI0Zpnzp6DcQgage1e4kCCP9GqbiRUYz0JBsIkm9J_Dsb9XesQtSyMZJ90avRZH_zls5Zr42jP8dTrsIoNkfxSsJSbTVqphbIdgiXEFDyVwFXgq6K4Pa6klfUfnvJjc4Dlh4SubBsrN5DBdpVSUjwfUDHds2YoB3LC3LcZotM_l43D-Xl1gLxiQZhHXpkNwxBB6w14RGtwe05AJnqa7tceHnn9CPd8dIwqndFV-uGPDx4Vsb3OY3f4M15dA_4limvi-eZyuX2MBK6I";
 spotifyApi.setAccessToken(token);
 
 // credentials are optional
