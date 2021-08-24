@@ -93,32 +93,48 @@ app.get("/callback", (req, res) => {
 
 // retreieve an access token ?
 
-spotifyApi.clientCredentialsGrant().then(
-  function (data) {
-    console.log("_________________________________________");
-    console.log("The access token expires in " + data.body["expires_in"]);
-    console.log("The access token is " + data.body["access_token"]);
-    console.log("_________________________________________");
-    spotifyApi.setAccessToken(data.body["access_token"]);
-  },
-  function (err) {
-    console.log(
-      "Something went wrong when retrieving an access token",
-      err.message
-    );
-  }
-);
+// spotifyApi.clientCredentialsGrant().then(
+//   function (data) {
+//     console.log("_________________________________________");
+//     console.log("The access token expires in " + data.body["expires_in"]);
+//     console.log("The access token is " + data.body["access_token"]);
+//     console.log("_________________________________________");
+//     spotifyApi.setAccessToken(data.body["access_token"]);
+//   },
+//   function (err) {
+//     console.log(
+//       "Something went wrong when retrieving an access token",
+//       err.message
+//     );
+//   }
+// );
 
 // route for artists
 app.get("/topartists/longterm", async (req, res) => {
-  const data = await spotifyApi.getMyTopArtists({
-    time_range: "long_term",
-    limit: 8,
-  });
-  res.json({
-    message: "your top artists over the past several years",
-    top_artists: data.body.items.map((item) => item.name),
-  });
+  spotifyApi.clientCredentialsGrant().then(
+    function (data) {
+      console.log("_________________________________________");
+      console.log("The access token expires in " + data.body["expires_in"]);
+      console.log("The access token is " + data.body["access_token"]);
+      console.log("_________________________________________");
+      spotifyApi.setAccessToken(data.body["access_token"]);
+      const data = await spotifyApi.getMyTopArtists({
+        time_range: "long_term",
+        limit: 8,
+      });
+      res.json({
+        message: "your top artists over the past several years",
+        top_artists: data.body.items.map((item) => item.name),
+      });
+    },
+
+    function (err) {
+      console.log(
+        "Something went wrong when retrieving an access token",
+        err.message
+      );
+    }
+  );
 });
 
 app.get("/topartists/mediumterm", async (req, res) => {
