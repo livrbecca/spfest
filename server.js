@@ -124,7 +124,7 @@ app.get("/topartists/longterm", async (req, res) => {
       });
       res.json({
         message: "your top artists over the past several years",
-        top_artists: data.body.items.map((item) => item.name),
+        top_artists: musicData.body.items.map((item) => item.name),
       });
     },
 
