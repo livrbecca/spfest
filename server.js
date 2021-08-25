@@ -108,11 +108,9 @@ app.get("/topartists/longterm", async (req, res) => {
       message: "your top artists over the past several years",
       top_artists: data.body.items.map((item) => item.name),
     });
-  } catch (err) {
-    res.json({
-      message: err,
-      message1: console.log(err.message),
-    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 
@@ -127,8 +125,9 @@ app.get("/topartists/mediumterm", async (req, res) => {
       message: "your top artists over the past 6 months",
       top_artists: data.body.items.map((item) => item.name),
     });
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 
@@ -143,8 +142,9 @@ app.get("/topartists/shortterm", async (req, res) => {
       message: "your top artists over the past 4 weeks",
       top_artists: data.body.items.map((item) => item.name),
     });
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 
