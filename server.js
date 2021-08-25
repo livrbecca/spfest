@@ -109,7 +109,10 @@ app.get("/topartists/longterm", async (req, res) => {
       top_artists: data.body.items.map((item) => item.name),
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({
+      message: err,
+      message1: console.log(err.message),
+    });
   }
 });
 
