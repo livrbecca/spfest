@@ -8,8 +8,11 @@ app.use(express.json());
 
 // sever works when running all routes on postman / browser
 // possible addition: errors & unhandled rejections
+// try / catch block, server side will works.
 
-
+// HEROKU LINK
+//https://limitless-reaches-08987.herokuapp.com/login - doesn't work
+// site cant be reached, localhost refused to connect, then heroku application error
 const scopes = [
   "ugc-image-upload",
   "user-read-playback-state",
@@ -95,40 +98,51 @@ app.get("/callback", (req, res) => {
 
 // route for artists
 app.get("/topartists/longterm", async (req, res) => {
-  const data = await spotifyApi.getMyTopArtists({
-    time_range: "long_term",
-    limit: 8,
-  });
+  try {
+    const data = await spotifyApi.getMyTopArtists({
+      time_range: "long_term",
+      limit: 8,
+    });
 
-  res.json({
-    message: "your top artists over the past several years",
-    top_artists: data.body.items.map((item) => item.name),
-  });
+    res.json({
+      message: "your top artists over the past several years",
+      top_artists: data.body.items.map((item) => item.name),
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
 app.get("/topartists/mediumterm", async (req, res) => {
-  const data = await spotifyApi.getMyTopArtists({
-    time_range: "medium_term",
-    limit: 8,
-  });
+  try {
+    const data = await spotifyApi.getMyTopArtists({
+      time_range: "medium_term",
+      limit: 8,
+    });
 
-  res.json({
-    message: "your top artists over the past 6 months",
-    top_artists: data.body.items.map((item) => item.name),
-  });
+    res.json({
+      message: "your top artists over the past 6 months",
+      top_artists: data.body.items.map((item) => item.name),
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
 app.get("/topartists/shortterm", async (req, res) => {
-  //console.log(process.env);
-  const data = await spotifyApi.getMyTopArtists({
-    time_range: "short_term",
-    limit: 8,
-  });
+  try {
+    const data = await spotifyApi.getMyTopArtists({
+      time_range: "short_term",
+      limit: 8,
+    });
 
-  res.json({
-    message: "your top artists over the past 4 weeks",
-    top_artists: data.body.items.map((item) => item.name),
-  });
+    res.json({
+      message: "your top artists over the past 4 weeks",
+      top_artists: data.body.items.map((item) => item.name),
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
 app.listen(process.env.PORT, () =>
