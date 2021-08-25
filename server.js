@@ -38,7 +38,9 @@ const scopes = [
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENTSECRET,
-  redirectUri: "http://localhost:8888/callback",
+  redirectUri: process.env.LOCAL
+    ? "http://localhost:8888/callback"
+    : "https://limitless-reaches-08987.herokuapp.com/callback",
 });
 
 // checked with incognito browser: takes you directly to spotifys
