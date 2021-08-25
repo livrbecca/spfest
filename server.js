@@ -38,9 +38,10 @@ const scopes = [
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENTSECRET,
-  redirectUri: process.env.LOCAL
-    ? "http://localhost:8888/callback"
-    : "https://limitless-reaches-08987.herokuapp.com/callback",
+  redirectUri:
+    process.env.LOCAL === "TRUE"
+      ? "http://localhost:8888/callback"
+      : "https://limitless-reaches-08987.herokuapp.com/callback",
 });
 
 // checked with incognito browser: takes you directly to spotifys
@@ -48,6 +49,7 @@ const spotifyApi = new SpotifyWebApi({
 // after log in: browser says: Success! You can now close the window.
 app.get("/login", (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
+  console.log(process.env);
 });
 
 // now you have an access token, checked with console.log
