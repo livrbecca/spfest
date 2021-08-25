@@ -6,6 +6,8 @@ var SpotifyWebApi = require("spotify-web-api-node");
 app.use(cors());
 app.use(express.json());
 
+// NEW CHANGE SSDSFSFDFSSSF
+
 // sever works when running all routes on postman / browser
 // possible addition: errors & unhandled rejections
 // try / catch block, server side will works.
