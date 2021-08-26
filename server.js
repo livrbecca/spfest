@@ -105,7 +105,7 @@ app.get("/topartists/longterm", async (req, res) => {
   try {
     const data = await spotifyApi.getMyTopArtists({
       time_range: "long_term",
-      limit: 8,
+      
     });
 
     res.json({
@@ -122,7 +122,7 @@ app.get("/topartists/mediumterm", async (req, res) => {
   try {
     const data = await spotifyApi.getMyTopArtists({
       time_range: "medium_term",
-      limit: 8,
+      
     });
 
     res.json({
@@ -139,7 +139,7 @@ app.get("/topartists/shortterm", async (req, res) => {
   try {
     const data = await spotifyApi.getMyTopArtists({
       time_range: "short_term",
-      limit: 8,
+     
     });
 
     res.json({
